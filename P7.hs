@@ -11,7 +11,9 @@ divsOf x = filter (\y -> x `mod` y == 0)
   s = start x
 
 isPrim :: Int -> Bool
-isPrim x = null $ divsOf x
+isPrim x = null divs || divs == [x]
+ where
+  divs = divsOf x
 
 
 --------------------------------------------------------------------------------
