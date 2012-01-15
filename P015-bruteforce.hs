@@ -38,9 +38,7 @@ possibleMoves :: Map -> [Coord]
 possibleMoves Map{ sizeX, sizeY, path } =
   concatMap toValidCoord 
     [ (x+1,y  )
-    -- , (x-1,y  )
     , (x  ,y+1) ]
-    -- , (x  ,y-1) ]
  where
   Coord x y | null path = Coord 0 0
             | otherwise = last path
