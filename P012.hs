@@ -14,9 +14,6 @@ divsOf n = nub {- . sort -} $ [1, n] ++ loop 2 (floor (sqrt (fi n)))
 triangs :: [Int]
 triangs = [ sum [1..x] | x <- [1..] ]
 
-p12 :: Int
-p12 = head $ filter (\x -> length (divsOf x) >= 500) triangs
-
 main :: IO ()
 main = mapM_ print $ count 0 triangs
  where
