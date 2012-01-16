@@ -14,7 +14,7 @@ data Exact = Exact Int [Dec]
 instance Show Exact where
   show (Exact i ds) = show i ++ "." ++ if null ds then "0" else concatMap show ds
 
-exact :: Int -> Int -> Exact -- (Int,[Dec])
+exact :: Int -> Int -> Exact
 exact x y = Exact (x `div` y) (go ((x `rem` y)*10) [])
  where
   go :: Int -> [Dec] -> [Dec]
