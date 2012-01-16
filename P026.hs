@@ -28,7 +28,7 @@ exact x y = Exact (x `div` y) (go ((x `rem` y)*10) [])
   mkRec (ds,rs) = ds ++ [Rec (map (\(Dec i _) -> i) rs)]
 
 lengthOfRec :: [Dec] -> Int
-lengthOfRec []           = 0
+lengthOfRec []            = 0
 lengthOfRec (Dec _ _ : r) = lengthOfRec r
 lengthOfRec (Rec r   : _) = length r
 
