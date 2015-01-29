@@ -1,7 +1,7 @@
 import Data.List
 import Control.Monad
 
-import P022data
+import Data.P022
 
 value :: String -> Int
 value = sum . map charVal

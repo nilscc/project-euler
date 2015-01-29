@@ -1,4 +1,4 @@
-module P067data where
+module Data.P067 where
 
 triang :: [[Int]]
 triang =

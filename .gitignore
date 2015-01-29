@@ -1,3 +1,5 @@
 *.swp
-*.ho
+*.hi
+*.o
 .hs_tags
+build/

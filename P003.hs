@@ -41,3 +41,6 @@ p3 = 600851475143
 
 p3_res :: Int
 p3_res = head $ filter isPrim (divsOf p3)
+
+main :: IO ()
+main = print p3_res

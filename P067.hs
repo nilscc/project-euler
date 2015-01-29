@@ -2,7 +2,7 @@
 import qualified Data.Map as M
 import Data.Map (elems, Map, alter, filterWithKey, fromList)
 
-import P067data
+import Data.P067
 
 type Coord = (Int,Int)
 
