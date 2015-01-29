@@ -14,6 +14,7 @@ $(OUTPUTDIR):
 
 $(OUTPUTDIR)/P%: P%.hs | $(OUTPUTDIR)
 	$(GHC) --make -O3 $< -outputdir $(OUTPUTDIR) -o $@
+	rm $(OUTPUTDIR)/Main.o $(OUTPUTDIR)/Main.hi
 
 clean:
-	rm *.o *.hi
+	-rm -r $(OUTPUTDIR)
