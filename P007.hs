@@ -30,3 +30,6 @@ sixth_prime = last $ take 6 $ filter isPrim [1..]
 
 p7 :: Int
 p7 = last $ take 10001 $ filter isPrim [1..]
+
+main :: IO ()
+main = print p7

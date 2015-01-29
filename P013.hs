@@ -11,7 +11,7 @@ p13 = toDigits $ foldl sumCols 0 [1..15]
 sumCol :: Int -> Int
 sumCol c = sum [ x | n <- nums, let x = toDigits n !! (c-1) ]
 
-toDigits :: Num a => a -> [Int]
+toDigits :: (Num a, Show a) => a -> [Int]
 toDigits = map (read . return) . show
 
 nums :: [Integer]

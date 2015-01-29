@@ -18,3 +18,6 @@ p8_num = 73167176531330624919225119674426574742355349194934969835203127745063262
 
 p8 :: Int
 p8 = maximum . consec $ split p8_num
+
+main :: IO ()
+main = print p8

@@ -53,7 +53,7 @@ diagUps = map product . mapMaybe sequence $
   | x <- [0..16]
   , y <- [0..16]
   ]
-  
+
 diagDowns :: [Int]
 diagDowns = map product . mapMaybe sequence $
   [ map (\(x',y') -> coord x' y' p11_nums)
@@ -64,3 +64,6 @@ diagDowns = map product . mapMaybe sequence $
 
 p11 :: Int
 p11 = maximum $ ups ++ lefts ++ diagDowns ++ diagUps
+
+main :: IO ()
+main = print p11

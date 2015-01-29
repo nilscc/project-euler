@@ -82,3 +82,6 @@ p19 = length
            , sunday <- sundays year'
            , isFirst year' sunday
            ]
+
+main :: IO ()
+main = print p19
