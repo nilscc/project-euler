@@ -1,10 +1,13 @@
+{-# LANGUAGE BangPatterns #-}
+
 {- | Miller-Rabin primality test
  -
  -}
-
-module MillerRabin where
+module Algorithm.MillerRabin where
 
 import System.Random
+
+import Algorithm.PowMod
 
 -- testing
 import Data.List
@@ -43,7 +46,7 @@ millerRabin n k gen = witnessLoop k gen
     | otherwise          = innerLoop (s-1) x
    where
     (a, g') = randomR (2, n - 2) g
-    x       = (a^d) `mod` n
+    x       = powMod a d n
 
     innerLoop 0 _ = (g', Composite)
     innerLoop j x'
@@ -51,14 +54,24 @@ millerRabin n k gen = witnessLoop k gen
       | x'' == n-1 = witnessLoop (i-1) g'
       | otherwise = innerLoop (j - 1) x'
      where
-      x'' = (x'^(2 :: Int)) `mod` n
+      x'' = powMod x' 2 n
 
 -- | Deterministic Miller-Rabin primality test
 detMillerRabin
   :: Integer      -- ^ n > 1, an odd integer to test for primality
   -> MillerRabinResult
 detMillerRabin n
-  | n < 1     = Composite
+  | n < 1 || even n = Composite
+  | n < 2047 = loop [2]
+  | n < 1373653 = loop [2,3]
+  | n < 9080191 = loop [31,73]
+  | n < 25326001 = loop [2,3,5]
+  | n < 4759123141 = loop [2,7,61]
+  | n < 1122004669633 = loop [2,13,23,1662803]
+  | n < 2152302898747 = loop [2,3,5,7,11]
+  | n < 3474749660383 = loop [2,3,5,7,11,13]
+  | n < 341550071728321 = loop [2,3,5,7,11,13,17]
+  | n < 3825123056546413051 = loop [2,3,5,7,11,13,17,19,23]
   | otherwise = loop [ 2 .. min (n-1) (floor $ 2 * (log n')^(2 :: Int)) ]
  where
   n' = fromIntegral n :: Double
@@ -67,15 +80,14 @@ detMillerRabin n
 
   loop [] = Prime
   loop (a:as)
-    | ((a^d) `mod` n) /= 1 && powLoop 0
+    | (powMod a d n) /= 1 && powLoop 0
     = Composite
 
     | otherwise
     = loop as
    where
-
     powLoop r
-      | r < s     = (a^(2^r * d) `mod` n) /= (n-1) && powLoop (r+1)
+      | r < s     = (powMod a (2^r * d) n) /= (n-1) && powLoop (r+1)
       | otherwise = True
 
 isPrime :: Integer -> Bool
