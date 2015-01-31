@@ -26,3 +26,10 @@ $(OUTPUTDIR)/P%: P%.hs | $(OUTPUTDIR)
 
 clean:
 	-rm -r $(OUTPUTDIR)
+
+# Dependencies
+
+Algorithm/ModPow.hs:
+Algorithm/MillerRabin.hs: Algorithm/ModPow.hs
+
+P027.hs: Algorithm/MillerRabin.hs

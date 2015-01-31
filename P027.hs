@@ -1,7 +1,6 @@
 {-# LANGUAGE ViewPatterns #-}
 
---import Data.List
-import MillerRabin
+import Algorithm.MillerRabin
 
 numberOfPrimes :: Int -> Int -> Int
 numberOfPrimes (fromIntegral -> a) (fromIntegral -> b) = go 0
@@ -20,10 +19,10 @@ factorsWithMaximumNumberOfPrimes =
   go (a,b,m) a'   1000 = go (a,b,m) (a'+1) (-999)
   go (a,b,m) a'   b'   =
     case numberOfPrimes a' b' of
-      m' | m' > m    -> go (a', b', m') a' (b'+1)
-         | otherwise -> go (a,b,m)      a' (b'+1)
-
+      m' | m' > m    -> go (a',b',m') a' (b'+1)
+         | otherwise -> go (a,b,m)    a' (b'+1)
 
 main :: IO ()
 main = do
-  print factorsWithMaximumNumberOfPrimes
+  let r@(a,b) = factorsWithMaximumNumberOfPrimes
+  putStrLn $ show r ++ " => " ++ show (a * b)
