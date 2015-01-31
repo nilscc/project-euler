@@ -62,7 +62,7 @@ detMillerRabin
   -> MillerRabinResult
 detMillerRabin n
   | n < 1 || (n > 2 && even n) = Composite
-  | n == 2 = Prime
+  | n == 1 || n == 2 = Prime
   | n < 2047 = loop [2]
   | n < 1373653 = loop [2,3]
   | n < 9080191 = loop [31,73]
